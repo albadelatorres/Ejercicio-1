@@ -13,8 +13,8 @@ public class BankAccount {
 <span class="fc" id="L13">        return false;</span>
     }
     public int deposit(int amount) {
-<span class="pc bpc" id="L16" title="1 of 2 branches missed.">        if (amount &lt;0)</span>
-<span class="nc" id="L17">            throw new IllegalArgumentException(&quot;Amount cannot be negative&quot;);</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (amount &lt;0)</span>
+<span class="fc" id="L17">            throw new IllegalArgumentException(&quot;Amount cannot be negative&quot;);</span>
 <span class="fc" id="L18">        balance += amount;</span>
 <span class="fc" id="L19">        return balance;</span>
     }

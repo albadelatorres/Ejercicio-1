@@ -1,6 +1,7 @@
 package bank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,27 @@ public class BankAccountTest {
         return account.getBalance() == 0;
     }
 
+
     @Test
     public void deposit_shouldDepositFunds(){
         account.deposit(100);
         assertEquals(100, account.getBalance());
+    }
+
+    @Test
+    public void deposit_shouldNotDepositFundsWhenArgumentNegative(){
+        int fund= -100;
+        try {
+            account.deposit(fund);
+        } catch (IllegalArgumentException e) {
+            // Verifica que el saldo no cambió
+            assertEquals(0, account.getBalance());
+        }
+    }
+
+    @Test
+    public void deposit_shouldThrowExceptionWhenArgumentNegative(){
+        assertThrows(IllegalArgumentException.class, () -> account.deposit(-100));
     }
 
     @Test
@@ -34,7 +52,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void testWithdrawInsufficientBalance() {
+    public void withdraw_shouldNotWithdrawFundsWhenInsufficientBalance() {
         account.deposit(100);
         assertFalse(account.withdraw(150));
         assertEquals(100, account.getBalance());
